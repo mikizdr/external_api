@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
 });
 
+Route::apiResource('activities', 'ActivityController');
+
 /*
 Get filters
 GET /activities/filters
