@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Activity;
+use App\Http\Resources\Activity\ActivityCollection;
+use App\Http\Resources\Activity\ActivityResource;
 
 class ActivityController extends Controller
 {
@@ -14,7 +16,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return Activity::paginate(3);
+        return ActivityCollection::collection(Activity::paginate(3));
     }
 
     /**
@@ -36,7 +38,7 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        return $activity;
+        return new ActivityResource($activity);
     }
 
     /**

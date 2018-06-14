@@ -22,8 +22,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         return $request->user();
     });
 });
-
 Route::apiResource('activities', 'ActivityController');
+
 
 /*
 Get filters
