@@ -21,10 +21,17 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::apiResource('activities', 'ActivityController');
-    Route::apiResource('registrations', 'RegistrationController');
 });
+Route::apiResource('activities', 'ActivityController');
+Route::apiResource('registrations', 'RegistrationController');
 
+// Testing
+Route::apiResource('users', 'UserController');
+Route::apiResource('clubs', 'ClubController');
+// Route::prefix('clubs')->group(function () {
+    Route::get('clubs/{club}/users', 'ClubController@showUsers');
+// });
+// END Testing
 
 /*
 Get filters
