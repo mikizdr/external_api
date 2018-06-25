@@ -63,4 +63,20 @@ class ActivityController extends Controller
     {
         //
     }
+
+    /**
+     * Select activities between 2 dates.
+     *
+     * @param  string  $from
+     * @param  string  $to
+     * @return \Illuminate\Http\Response
+     */
+    public function activitiesBetweenDates($from, $to)
+    {
+        $activities = Activity::whereBetween('start_date', [$from, $to])
+            // ->orWhereBetween('start_date', [$from2, $to2])
+            // ->whereNotBetween('start_date', [$from3, $to3])
+            ->get();
+        return $activities;
+    }
 }

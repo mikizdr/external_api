@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,10 @@ Route::apiResource('registrations', 'RegistrationController');
 // Testing
 Route::apiResource('users', 'UserController');
 Route::apiResource('clubs', 'ClubController');
-// Route::prefix('clubs')->group(function () {
-    Route::get('clubs/{club}/users', 'ClubController@showUsers');
-// });
+Route::group(['prefix' => 'clubs/{club}'], function () {
+    Route::get('users', 'ClubController@showUsers')->name('club.users');
+});
+Route::get('activities/{from}/{to}', 'ActivityController@activitiesBetweenDates')->name('activities.between');
 // END Testing
 
 /*
