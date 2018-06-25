@@ -16,6 +16,7 @@ class ActivityCollection extends Resource
     {
         return [
             'name' => $this->name,
+            'start_date' => $this->start_date,
         ];
     }
 }

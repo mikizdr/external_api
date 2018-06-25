@@ -16,7 +16,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return ActivityCollection::collection(Activity::paginate(3));
+        return ActivityCollection::collection(Activity::paginate(5));
     }
 
     /**
