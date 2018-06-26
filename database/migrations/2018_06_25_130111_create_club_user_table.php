@@ -14,7 +14,7 @@ class CreateClubUserTable extends Migration
     public function up()
     {
         Schema::create('club_user', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
             $table->integer('creator_id');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
@@ -27,6 +27,7 @@ class CreateClubUserTable extends Migration
             $table->string('end_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->primary(['user_id', 'club_id', 'role_id']);
         });
     }
 

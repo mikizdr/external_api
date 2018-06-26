@@ -33,6 +33,7 @@ Route::group(['prefix' => 'clubs/{club}'], function () {
     Route::get('users', 'ClubController@showUsers')->name('club.users');
 });
 Route::get('activities/{from}/{to}', 'ActivityController@activitiesBetweenDates')->name('activities.between');
+Route::post('users/club_user', 'UserController@atach_user')->name('club.user');
 // END Testing
 
 /*
