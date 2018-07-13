@@ -79,17 +79,36 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Fitmanager RESTful API service for market places
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <button type="button" id="hello">Call API</button>
+                    <button type="button" id="getActivities">Get API logs</button>
                 </div>
             </div>
         </div>
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                $('#hello').on('click', function () {
+                    $.get('http://localhost:8000/api/hello', function (data) {
+                        alert(data);
+                    });
+                });
+                $('#getActivities').on('click', function () {
+                    $.get('http://localhost:8000/api/filter_logs/personal_infos?user_id=489&from_date=2018-06-02 06:00:00&to_date=2018-06-02 10:00:00', function (data) {
+                        console.log(data.data[0].data);
+                        // console.log(data.data[0].api_logs.channel);
+                        // console.log(typeof data.data[0].api_logs);
+                        // var obj = JSON.parse(data);
+                        // alert(obj.id);
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
