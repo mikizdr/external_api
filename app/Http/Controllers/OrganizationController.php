@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Activity;
-use App\Http\Resources\Activity\ActivityCollection;
-use App\Http\Resources\Activity\ActivityResource;
+use App\Models\Organization;
 
-class ActivityController extends Controller
+class OrganizationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return ActivityCollection::collection(Activity::paginate(5));
+        return Organization::paginate(10);
     }
 
     /**
@@ -33,22 +31,22 @@ class ActivityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Activity  $activity
+     * @param  Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function show(Activity $activity)
+    public function show(Organization $organization)
     {
-        return new ActivityResource($activity);
+        return $organization;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Activity  $activity
+     * @param  Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Activity $activity)
+    public function update(Request $request, Organization $organization)
     {
         //
     }
@@ -56,10 +54,10 @@ class ActivityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Activity  $activity
+     * @param  Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy(Organization $organization)
     {
         //
     }

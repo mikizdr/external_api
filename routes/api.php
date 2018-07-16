@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 Route::apiResource('activities', 'ActivityController');
 Route::apiResource('registrations', 'RegistrationController');
+Route::apiResource('organizations', 'OrganizationController');
 
 
 /*
