@@ -27,6 +27,13 @@ Route::apiResource('registrations', 'RegistrationController');
 Route::apiResource('organizations', 'OrganizationController');
 Route::apiResource('users', 'UserController');
 
+/*
+|----------------------
+| Filtering activities
+|----------------------
+*/
+Route::get('{club_id}/activities/', 'FilterActivitiesController@filterActivitiesByRequest');
+
 
 /*
 Get filters
