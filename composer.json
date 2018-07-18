@@ -12,7 +12,8 @@
         "laravel/passport": "^6.0",
         "laravel/tinker": "^1.0",
         "vlucas/phpdotenv": "^2.5",
-        "doctrine/dbal": "v2.7.1"
+        "doctrine/dbal": "v2.7.1",
+        "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

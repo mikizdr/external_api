@@ -25,6 +25,15 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 Route::apiResource('activities', 'ActivityController');
 Route::apiResource('registrations', 'RegistrationController');
+Route::apiResource('organizations', 'OrganizationController');
+Route::apiResource('users', 'UserController');
+
+/*
+|----------------------
+| Filtering activities
+|----------------------
+*/
+Route::get('{club_id}/activities/', 'FilterActivitiesController@filterActivitiesByRequest');
 
 // Testing
 Route::apiResource('users', 'UserController');

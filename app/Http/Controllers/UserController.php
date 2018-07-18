@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Club;
 use App\User;
+use App\Http\Requests\User\UserRequest;
+use Symfony\Component\HttpFoundation\Response;
+use App\Models\Club;
 
 class UserController extends Controller
 {
@@ -15,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::paginate(10);
     }
 
     /**
@@ -24,9 +26,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -49,7 +51,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->last_name = $request->last_name;
+        $user->save();
+
+        return response()->json([
+            'message' => 'The resource is updated successfully.'
+        ], Response::HTTP_CREATED);
     }
 
     /**
