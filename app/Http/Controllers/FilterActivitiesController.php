@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Resources\Activity\ActivitiesFilterCollection;
+use App\Http\Resources\Activity\FilterActivitiesCollection;
 
 class FilterActivitiesController extends Controller
 {
@@ -72,7 +72,7 @@ class FilterActivitiesController extends Controller
                         })
                         ->paginate(5);
                     
-    return ActivitiesFilterCollection::collection($activities);
+    return FilterActivitiesCollection::collection($activities);
 
     return response()->json([
         'error' => 'There is no data for your request.'
