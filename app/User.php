@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'user_id', 'email', 'password', 'first_name', 'last_name', 'birth_date', 'last_message_view', 'pwd_change_date',
     ];
 
     /**
@@ -27,6 +27,19 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * Default values for model
+     * 
+     * @var array
+     */
+    public $attributes = [
+        'account_state' => -10,
+        'creation_date' => '2018-07-19',
+        'salt'          => 'argsd',
+        'creator_id'    => 1,
+        'pwd_change_key'=> '5a43c32ba21d3',
     ];
 
     /**

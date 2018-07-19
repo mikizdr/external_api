@@ -9,24 +9,22 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Http\Request;
+use App\User;
 
-class CreateUserEvent
+class AttachUserEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $email;
-    public $request;
-
+    public $user;
+    
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($email, Request $request)
+    public function __construct(User $user)
     {
-        $this->email = $email;
-        $this->request = $request;
+        $this->user = $user;
     }
 
 }

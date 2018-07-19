@@ -17,6 +17,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\CreateUserEventListener',
             'App\Listeners\AttachOrganizationEventListener',
         ],
+        'App\Events\AttachUserEvent' => [
+            'App\Listeners\CheckAndAttachUserToOrganization',
+        ],
     ];
 
     /**

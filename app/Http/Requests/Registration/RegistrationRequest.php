@@ -24,7 +24,7 @@ class RegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            "user_id"      => 'required',
+            "club_id"      => 'required',
             "activity_id"  => 'required',
         ];
     }
