@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
-use App\Models\Club;
+use App\Models\Organization;
 
 class User extends Authenticatable
 {
@@ -45,9 +45,9 @@ class User extends Authenticatable
     /**
      * Illuminate\Database\Eloquent\Relations\BelongsToMany|Club
      */
-    public function clubs()
+    public function organizations()
     {
-        return $this->belongsToMany(Club::class)
+        return $this->belongsToMany(Organization::class)
             ->withTimestamps();
     }
 }
