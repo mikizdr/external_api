@@ -18,7 +18,7 @@ class CreateOrganizationUserTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->integer('user_id');
-            $table->integer('club_id');
+            $table->integer('organization_id');
             $table->integer('role_id');
             $table->string('status');
             $table->string('approval_date')->nullable();
@@ -26,7 +26,7 @@ class CreateOrganizationUserTable extends Migration
             $table->string('end_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->primary(['user_id', 'club_id', 'role_id']);
+            $table->primary(['user_id', 'organization_id', 'role_id']);
         });
     }
 
