@@ -33,30 +33,40 @@ Route::apiResource('users', 'UserController');
 | Filtering activities
 |----------------------
 */
-Route::get('{club_id}/activities/', 'FilterActivitiesController@filterActivitiesByRequest');
+Route::get('{club_id}/filter_activities/', 'FilterActivitiesController@filterActivitiesByRequest');
 
 // Testing
 Route::apiResource('users', 'UserController');
-Route::apiResource('clubs', 'ClubController');
-Route::group(['prefix' => 'clubs/{club}'], function () {
-    Route::get('users', 'ClubController@showUsers')->name('club.users');
-});
-Route::get('activities/{from}/{to}', 'ActivityController@activitiesBetweenDates')->name('activities.between');
+// Route::apiResource('clubs', 'ClubController');
+// Route::group(['prefix' => 'clubs/{club}'], function () {
+//     Route::get('users', 'ClubController@showUsers')->name('club.users');
+// });
+// Route::get('activities/{from}/{to}', 'ActivityController@activitiesBetweenDates')->name('activities.between');
 Route::post('users/club_user', 'UserController@atach_user')->name('club.user');
 // END Testing
+
+/*
+|
+| CORS testing
+|
+*/
+Route::get('hello', function () {
+  return 'Hello with CORS!';
+});
+
 
 /*
 Get filters
 GET /activities/filters
 
 Returns a list of the available filters this club has configured for activities
- 
+
 Get activities
 GET /activities
 URL parameters:
-lower_date (optional): the minimum start date 
+lower_date (optional): the minimum start date
 upper_date (optional): the maximum start date
-filter_ids (optional): comma separated list of available filters 
+filter_ids (optional): comma separated list of available filters
 
 Returns a list of available activities from your club
 
@@ -67,7 +77,7 @@ Returns a single activity
 
 Register person for activity
 
-POST /registration 
+POST /registration
 POST data:
 activity_id (required)
 first_name (required)
@@ -81,7 +91,7 @@ Registers a person for the given activity id. Returns a unique ID for this regis
 Unregister person
 DELETE /registration/<REGISTRATION_ID>
 
-Removes a registration 
+Removes a registration
 
 Mark Present
 PUT /registration/<ID>/presence
