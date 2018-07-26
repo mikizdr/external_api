@@ -19,7 +19,7 @@ class FilterActivitiesController extends Controller
     {
         if (empty($club_id)) {
             return response()->json([
-                'error' => 'There is ID for the club. Please provide.'
+                'error' => 'There is no ID for the club. Please provide.'
             ]);
         }
 
@@ -71,12 +71,12 @@ class FilterActivitiesController extends Controller
                             return $query->whereBetween('start_date', [$from_date, $to_date]);
                         })
                         ->paginate(5);
-                    
+
     return FilterActivitiesCollection::collection($activities);
 
     return response()->json([
         'error' => 'There is no data for your request.'
     ], Response::HTTP_NOT_FOUND);
-    
+
     }
 }

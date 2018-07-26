@@ -16,6 +16,7 @@ class FilterActivitiesCollection extends Resource
     {
         return [
             'name'        => $this->name,
+            'organizer_ref'        => $this->organizer_ref,
             'start_date'  => $this->start_date,
         ];
     }
