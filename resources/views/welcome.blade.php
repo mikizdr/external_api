@@ -80,6 +80,8 @@
             <div class="content">
                 <div class="title m-b-md">
                     Fitmanager RESTful API service for market places
+                    <br>
+                    Environment: {{ app()->environment() }}
                 </div>
 
                 <div class="links">
