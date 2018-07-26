@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Activity;
-use App\Http\Resources\Activity\ActivityCollection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Services\CheckOwnershipService;
 use App\Http\Resources\Activity\ActivityResource;
+use App\Http\Resources\Activity\ActivityCollection;
 
 class ActivityController extends Controller
 {
@@ -14,9 +16,14 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return ActivityCollection::collection(Activity::paginate(5));
+      $ownership = new CheckOwnershipService();
+      return $ownership->returnOrganizationIds();
+
+      $activities = Activity::where('organizer_ref', '=', $request->organizer_ref)->paginate(10);
+      // return $activities;
+      return ActivityCollection::collection($activities);
     }
 
     /**
