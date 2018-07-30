@@ -81,6 +81,7 @@
                     Fitmanager RESTful API service for market places
                     <br>
                     Environment: {{ app()->environment() }}
+                    Version: {{ app()->version() }}
                 </div>
 
                 <div class="links">
