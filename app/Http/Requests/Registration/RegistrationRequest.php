@@ -28,4 +28,17 @@ class RegistrationRequest extends FormRequest
             "activity_id"  => 'required',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'club_id.required'      => 'A club ID is required.',
+            'activity_id.required'  => 'An activity ID is required.',
+        ];
+    }
 }

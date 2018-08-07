@@ -29,6 +29,14 @@ class CheckOwner
           ]);
       }
 
+      if (!empty($request->club_id)) {
+        if (!in_array($request->club_id, $ownership->returnOrganizationIds()->toArray())) {
+            return response()->json([
+                'error' => 'You have no credentials for the required club.'
+            ]);
+        }
+    }
+
       return $next($request);
     }
 }

@@ -14,33 +14,27 @@ class CheckOwnershipService
   /**
    * @var OauthClient
    */
-  public $client;
+  private $client;
 
   /**
    * @var mixed
    */
-  public $links;
+  private $links;
 
   public function __construct()
   {
-    if (!isset($_SERVER['HTTP_OAUTH_SECRET']))
-      return [
-        false, 'HTTP header is not correct. Client key is not provided.'
-      ];
+    if (isset($_SERVER['HTTP_OAUTH_SECRET'])) {
+      $this->client = DB::table('oauth_clients')->where('secret', $_SERVER['HTTP_OAUTH_SECRET'])->first();
+    }
 
-    $this->client = DB::table('oauth_clients')->where('secret', $_SERVER['HTTP_OAUTH_SECRET'])->first();
-
-    if ($this->client === null)
-      return [
-        false, 'CLIENT HAS NO CREDENTIALS'
-      ];
-
-    $this->links = DB::table('objectlinks')
-      ->where('object_ref', $this->client->user_id)
-      ->where('relation', 'member') // internal conventions for links between owner of the club and the club in objectlinks table
-      ->where('is_controller', 1)
-      ->where('state', 'active')
-      ->get();
+    if ($this->client !== null) {
+      $this->links = DB::table('objectlinks')
+        ->where('object_ref', $this->client->user_id)
+        ->where('relation', 'member') // internal conventions for links between owner of the club and the club in objectlinks table
+        ->where('is_controller', 1)
+        ->where('state', 'active')
+        ->get();
+    }
   }
 
   /**
@@ -52,6 +46,16 @@ class CheckOwnershipService
    */
   public function validateOwner()
   {
+    if (!isset($_SERVER['HTTP_OAUTH_SECRET']))
+      return [
+        false, 'HTTP header is not correct. Client key is not provided.'
+      ];
+    
+    if ($this->client === null)
+      return [
+        false, 'CLIENT HAS NO CREDENTIALS FOR THIS SERVICE.'
+      ];
+
     if (count($this->links) == 0)
       return [
         false, 'Fatal error: the user who granted access to the resources is not an owner of any clubs. Sorry but you can not use them.'
@@ -68,6 +72,9 @@ class CheckOwnershipService
    */
   public function returnOrganizationIds()
   {
-    return $this->links->pluck('link_ref');
+    if (count($this->links) != 0) {
+      return $this->links->pluck('link_ref');
+    }
+    return [];
   }
 }
