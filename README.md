@@ -16,18 +16,20 @@ From above mentioned, marketplaces can view activities for the clubs for which t
 The next steps explain how to insall the application locally. As far as deploying, it can be done in the same way as every other Laravel application.
 
 ### Application
-Colone or download the repository. After that run the command:
-```composer install```
-from the root directory. Create .env file and enter credential for mysql database or copy and rename the existing file .env.example. In the application requires a APP_KEY run:
-```php artisan key:generate```
+Clone or download the repository. After that run the command ```composer install``` from the root directory. Create .env file and enter credential for mysql database or copy and rename the existing file .env.example. In the application requires a APP_KEY run:
+```
+php artisan key:generate
+```
 to create a new base64 key for application.
 If you want to run application from the local folder just simple run command:
-```php artisan serve``` 
+```
+php artisan serve
+``` 
 > NOTE: if you want application to be ran on a certain port (e.g. 3000), run the command ```php artisan serve --port=3000```
 Or the application can be served from any web server.
 
 ### OAuth 2.0 server
-It is implemented through Laravel Passport. Follow [Laravel Passport](https://laravel.com/docs/5.6/passport) tutorial for every detail about OAuth2 server implementation and settings.
+OAuth 2.0 server is implemented through Laravel Passport. Follow [Laravel Passport](https://laravel.com/docs/5.6/passport) tutorial for every detail about OAuth2 server implementation and settings.
 
 ## Development
 
@@ -76,7 +78,8 @@ This trait will provide a few helper methods to your model which allow you to in
 
 #### Frontend quick start 
 
->NOTE: Follow the tutorial for [quick start](https://laravel.com/docs/5.6/passport#frontend-quickstart)
+>NOTE: Follow the tutorial for [quick start](https://laravel.com/docs/5.6/passport#frontend-quickstart).
+
 To publish the Passport Vue components, use the vendor:publish Artisan command:
 ```
 php artisan vendor:publish --tag=passport-components
