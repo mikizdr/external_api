@@ -16,7 +16,7 @@ From above mentioned, marketplaces can view activities for the clubs for which t
 The next steps explain how to insall the application locally. As far as deploying, it can be done in the same way as every other Laravel application.
 
 ### Application
-Clone or download the repository. After that run the command ```composer install``` from the root directory. Create .env file and enter credential for mysql database or copy and rename the existing file .env.example. In the application requires a APP_KEY run:
+Clone or download the repository. After that run the command `composer install` from the root directory. Create .env file and enter credential for mysql database or copy and rename the existing file .env.example. In the application requires a APP_KEY run:
 ```
 php artisan key:generate
 ```
@@ -25,7 +25,7 @@ If you want to run application from the local folder just simple run command:
 ```
 php artisan serve
 ``` 
-> NOTE: if you want application to be ran on a certain port (e.g. 3000), run the command ```php artisan serve --port=3000```.
+> NOTE: if you want application to be ran on a certain port (e.g. 3000), run the command `php artisan serve --port=3000`.
 The application can be also served from any web server.
 
 ### OAuth 2.0 server
@@ -84,12 +84,12 @@ To publish the Passport Vue components, use the vendor:publish Artisan command:
 ```
 php artisan vendor:publish --tag=passport-components
 ```
-After registering the components, make sure to run ```npm run dev``` to recompile your assets. 
+After registering the components, make sure to run `npm run dev` to recompile your assets. 
 
 
 ### Authentication and authorization
 
-As mentioned above, **only** club owners have authorization to grant access to third party software to access resources and because of that only club owners can login to this service. Middleware ```\App\Http\Middleware\CheckOwner``` is registered in `Kernel.php` and it is called on every API request. Middleware is doing two actions: 1. Checks the ownerships and if so 2. checks whether the client has rights to require a certain resources. This middleware calls `App\Services\CheckOwnershipService` that validate checks if HTTP header contains OAuth secret key and if that key is properely connected to the user (club owner) who granted access. The connection is checked through `objectlinks` table.
+As mentioned above, **only** club owners have authorization to grant access to third party software to access resources and because of that only club owners can login to this service. Middleware `\App\Http\Middleware\CheckOwner` is registered in `Kernel.php` and it is called on every API request. Middleware is doing two actions: 1. Checks the ownerships and if so 2. checks whether the client has rights to require a certain resources. This middleware calls `App\Services\CheckOwnershipService` that validate checks if HTTP header contains OAuth secret key and if that key is properely connected to the user (club owner) who granted access. The connection is checked through `objectlinks` table.
 
 ### Validation rules
 ### Activities URLs
