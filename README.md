@@ -23,7 +23,7 @@ from the root directory. Create .env file and enter credential for mysql databas
 to create a new base64 key for application.
 If you want to run application from the local folder just simple run command:
 ```php artisan serve``` 
-> NOTE: if you want application to be ran on a certain port, run the command ```php artisan server --port=3000```
+> NOTE: if you want application to be ran on a certain port (e.g. 3000), run the command ```php artisan serve --port=3000```
 Or the application can be served from any web server.
 
 ### OAuth 2.0 server
@@ -32,7 +32,36 @@ It is implemented through Laravel Passport. Follow [Laravel Passport](https://la
 ## Development
 
 ### Database
+
+The application is connected to Fitmanager DB and credentials are stored in .env file. After basic installation of the application, it is neccessary to run ```php artisan migrate``` to install all tables for OAuth server as well as some changes to columns in the existing tables how the application could work. (If there is any doubt about migrations feel free to ask me about details but I was trying to comment every block of code in the application.)
+
 ### OAuth authentication
+
+OAuth server relies on the tables with prefix oatuh_. Those tables are created after ```php artisan migrate```. It is also required to run the command ```php artisan passport:install```. This command will create the encryption keys needed to generate secure access tokens. In addition, the command will create "personal access" and "password grant" clients which will be used to generate access tokens.
+After creating tables, in User model is added ``Laravel\Passport\HasApiTokens`` triat.
+```php
+namespace App;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+use App\Models\Organization;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'email', 'password', 'first_name', 'last_name', 'birth_date', 'last_message_view', 'pwd_change_date',
+    ];
+```
+This trait will provide a few helper methods to your model which allow you to inspect the authenticated user's token and scopes
+
 ### Login
 ### Validation rules
 ### Activities URLs
