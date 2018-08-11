@@ -37,7 +37,11 @@ The application is connected to Fitmanager DB and credentials are stored in .env
 
 ### OAuth authentication
 
-OAuth server relies on the tables with prefix oatuh_. Those tables are created after ```php artisan migrate```. It is also required to run the command ```php artisan passport:install```. This command will create the encryption keys needed to generate secure access tokens. In addition, the command will create "personal access" and "password grant" clients which will be used to generate access tokens.
+OAuth server relies on the tables with prefix oatuh_. Those tables are created after 
+```
+php artisan migrate
+```
+It is also required to run the command ```php artisan passport:install```. This command will create the encryption keys needed to generate secure access tokens. In addition, the command will create "personal access" and "password grant" clients which will be used to generate access tokens.
 After creating tables, in User model is added ``Laravel\Passport\HasApiTokens`` triat.
 ```php
 namespace App;
