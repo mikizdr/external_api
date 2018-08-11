@@ -25,8 +25,8 @@ If you want to run application from the local folder just simple run command:
 ```
 php artisan serve
 ``` 
-> NOTE: if you want application to be ran on a certain port (e.g. 3000), run the command ```php artisan serve --port=3000```
-Or the application can be served from any web server.
+> NOTE: if you want application to be ran on a certain port (e.g. 3000), run the command ```php artisan serve --port=3000```.
+The application can be also served from any web server.
 
 ### OAuth 2.0 server
 OAuth 2.0 server is implemented through Laravel Passport. Follow [Laravel Passport](https://laravel.com/docs/5.6/passport) tutorial for every detail about OAuth2 server implementation and settings.
@@ -87,7 +87,10 @@ php artisan vendor:publish --tag=passport-components
 After registering the components, make sure to run ```npm run dev``` to recompile your assets. 
 
 
-### Login
+### Authentication and authorization
+
+As mentioned above, **only** club owners have authorization to grant access to third party software to access resources and because of that only club owners can login to this service. Middleware ```\App\Http\Middleware\CheckOwner``` is registered in `Kernel.php` and it is called on every API request. Middleware is doing two actions: 1. Checks the ownerships and if so 2. checks whether the client has rights to require a certain resources. This middleware calls `App\Services\CheckOwnershipService` that validate checks if HTTP header contains OAuth secret key and if that key is properely connected to the user (club owner) who granted access. The connection is checked through `objectlinks` table.
+
 ### Validation rules
 ### Activities URLs
 ### Registrations URLs
