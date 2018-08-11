@@ -98,8 +98,29 @@ Content-Type  :application/json
 Authorization :Bearer {{api_key}}
 oauth_secret  :{{oauth_secret}}
 ```
-(this can be used as preset for HTTP request's header and can be inserted through `Bulk Edit` (copy/paste) in [Postman](https://www.getpostman.com/) when testing APIs)
+(this can be used as preset for HTTP request's header and can be inserted through `Bulk Edit` (copy/paste) in [Postman](https://www.getpostman.com/) when testing APIs).
 
+### Models, Views, Controllers
+
+Models that are created for this services are `Activity`, `Organization` and `Registration`. They are linked to the corresponding tables: `activities`, `organizations` and `registrations`. 
+Views are default Laravel views that comes with `php artisan make:auth` command.
+All controllers in the application are of REST type. Unused method can be activated when it's needed. 
+`ActivityController` contains `index` method that is used to fetch a collection of activities and to filter activities at the same time by next parameters:
+```
+organizer_ref, name, is_day_event, start_date, zipcode, city, region, lat, lng, allow_freetrial, from_date, to_date, 
+```
+With this, the URL for GET request should look like this: e.g. `{base_url}/api/activities?start_date=2018-08-15&allow_freetrial=1`.
+`show` method in `ActivityController` is used to fetch a single activity.
+
+### Responses and transformers
+
+All responses are in JSON format. For activities there are two types of resources: `ActivityCollection` and `ActivityResource`. The former is used to transform (adjust) the form of JSON reponse when client requires a collection of activities. The latter is used to transform response when sending data in JSON format for a single activity. It's easy to add more field to every type of response if frontend require more data about resources.
+
+### Routes
+
+All routes are grouped together within protected route group with middleware `auth:api` and because of that every request **MUST** contain a valid OAuth API token.
+
+### CORS
 ### Validation rules
 ### Activities URLs
 ### Registrations URLs
