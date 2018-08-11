@@ -22,21 +22,21 @@ class CheckOwner
      */
     public function handle($request, Closure $next)
     {
-      $ownership = new CheckOwnershipService();
-      if (! $ownership->validateOwner()[0]) {
-        return response()->json([
-            'error' => $ownership->validateOwner()[1]
-          ]);
-      }
-
-      if (!empty($request->club_id)) {
-        if (!in_array($request->club_id, $ownership->returnOrganizationIds()->toArray())) {
+        $ownership = new CheckOwnershipService();
+        if (! $ownership->validateOwner()[0]) {
             return response()->json([
-                'error' => 'You have no credentials for the required club.'
+                'error' => $ownership->validateOwner()[1]
             ]);
         }
-    }
+ 
+        if (!empty($request->club_id)) {
+            if (!in_array($request->club_id, $ownership->returnOrganizationIds()->toArray())) {
+                return response()->json([
+                    'error' => 'You have no credentials for the required club.'
+                ]);
+            }
+        }
 
-      return $next($request);
+        return $next($request);
     }
 }
