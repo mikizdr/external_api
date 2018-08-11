@@ -80,7 +80,7 @@ This trait will provide a few helper methods to your model which allow you to in
 
 >NOTE: Follow the tutorial for [quick start](https://laravel.com/docs/5.6/passport#frontend-quickstart).
 
-To publish the Passport Vue components, use the vendor:publish Artisan command:
+To publish the Passport Vue components, use the `vendor:publish` Artisan command:
 ```
 php artisan vendor:publish --tag=passport-components
 ```
@@ -89,7 +89,16 @@ After registering the components, make sure to run `npm run dev` to recompile yo
 
 ### Authentication and authorization
 
-As mentioned above, **only** club owners have authorization to grant access to third party software to access resources and because of that only club owners can login to this service. Middleware `\App\Http\Middleware\CheckOwner` is registered in `Kernel.php` and it is called on every API request. Middleware is doing two actions: 1. Checks the ownerships and if so 2. checks whether the client has rights to require a certain resources. This middleware calls `App\Services\CheckOwnershipService` that validate checks if HTTP header contains OAuth secret key and if that key is properely connected to the user (club owner) who granted access. The connection is checked through `objectlinks` table.
+As mentioned above, **only** club owners have authorization to grant access to third party software to access resources and because of that **only** club owners can login to this service. Middleware `\App\Http\Middleware\CheckOwner` is registered in `Kernel.php` and it is called on every API request. Middleware is doing two actions: 1. Checks the ownerships and if so 2. checks whether the client has rights to require a certain resources. This middleware calls `App\Services\CheckOwnershipService` that validate checks if HTTP header contains OAuth secret key and if that key is properely connected to the user (club owner) who granted access. The connection is checked through `objectlinks` table. If there is valid user that is owner of one ore more clubs, method `CheckOwnershipService::returnOrganizationIds()` returns all ids of the clubs. It is important how the application could decide if e.g. required activity data are in the scope of that club(s). In that way, marketplace software can't require other resources but only those for which it has a valid OAuth API key and OAuth Secret ID. Secret ID is located in club owner's dashboard when he is logged in the service. A valid OAuth API token is required how external service can generally consume APIs and Secret ID is required to filter resources. 
+
+Because of above mentioned, HTTP header of any request **MUST** contain:
+```
+Accept        :application/json
+Content-Type  :application/json
+Authorization :Bearer {{api_key}}
+oauth_secret  :{{oauth_secret}}
+```
+(this can be used as preset for HTTP request's header and can be inserted through `Bulk Edit` (copy/paste) in [Postman](https://www.getpostman.com/) when testing APIs)
 
 ### Validation rules
 ### Activities URLs
