@@ -33,15 +33,23 @@ It is implemented through Laravel Passport. Follow [Laravel Passport](https://la
 
 ### Database
 
-The application is connected to Fitmanager DB and credentials are stored in .env file. After basic installation of the application, it is neccessary to run ```php artisan migrate``` to install all tables for OAuth server as well as some changes to columns in the existing tables how the application could work. (If there is any doubt about migrations feel free to ask me about details but I was trying to comment every block of code in the application.)
+The application is connected to Fitmanager DB and credentials are stored in .env file. After basic installation of the application, it is neccessary to run 
+```
+php artisan migrate
+```
+to install all tables for OAuth server as well as some changes to columns in the existing tables how the application could work. (If there is any doubt about migrations feel free to ask me about details but I was trying to comment every block of code in the application.)
 
-### OAuth authentication
+### OAuth implementation
 
 OAuth server relies on the tables with prefix oatuh_. Those tables are created after 
 ```
 php artisan migrate
 ```
-It is also required to run the command ```php artisan passport:install```. This command will create the encryption keys needed to generate secure access tokens. In addition, the command will create "personal access" and "password grant" clients which will be used to generate access tokens.
+It is also required to run the command 
+```
+php artisan passport:install
+``` 
+This command will create the encryption keys needed to generate secure access tokens. In addition, the command will create "personal access" and "password grant" clients which will be used to generate access tokens.
 After creating tables, in User model is added ``Laravel\Passport\HasApiTokens`` triat.
 ```php
 namespace App;
@@ -64,7 +72,17 @@ class User extends Authenticatable
         'user_id', 'email', 'password', 'first_name', 'last_name', 'birth_date', 'last_message_view', 'pwd_change_date',
     ];
 ```
-This trait will provide a few helper methods to your model which allow you to inspect the authenticated user's token and scopes
+This trait will provide a few helper methods to your model which allow you to inspect the authenticated user's token and scopes.
+
+#### Frontend quick start 
+
+>NOTE: Follow the tutorial for [quick start](https://laravel.com/docs/5.6/passport#frontend-quickstart)
+To publish the Passport Vue components, use the vendor:publish Artisan command:
+```
+php artisan vendor:publish --tag=passport-components
+```
+After registering the components, make sure to run ```npm run dev``` to recompile your assets. 
+
 
 ### Login
 ### Validation rules
