@@ -34,19 +34,7 @@ class RegistrationController extends Controller
      */
     public function store(RegistrationRequest $request)
     {
-        return $this->CheckIfUserExist($request);
-        if (!Organization::find($request->club_id)) {
-            return response()->json([
-                'error' => 'The club you want to register for the activity doesn\'t exist'
-            ]);
-        }
-
-        if ($this->CheckIfUserExist($request)){
-
-        }
-
-
-        return 'exist';
+        return $request;
         $registration = new Registration; 
         $registration->activity_id = $request->activity_id;
         $registration->activity_date = Activity::find($request->activity_id)->start_date;
