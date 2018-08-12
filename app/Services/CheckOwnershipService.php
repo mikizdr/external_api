@@ -58,7 +58,7 @@ class CheckOwnershipService
 
     if (count($this->links) == 0)
       return [
-        false, 'Fatal error: the user who granted access to the resources is not an owner of any clubs. Sorry but you can not use them.'
+        false, 'Fatal error: the user who granted access to the resources is not an owner of any clubs or he is not the owner any more. Sorry but you can not use them.'
       ];
 
     return [true];
@@ -66,7 +66,7 @@ class CheckOwnershipService
 
   /**
    * Returns ids of all organizations to whom the user is owner
-   * and who granted access to marketplace.\Carbon\Carbon
+   * and who granted access to marketplace.
    *
    * @return array
    */
