@@ -15,8 +15,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user = User::whereEmail($request->email)->first();
+        return $user;
         return User::paginate(10);
     }
 
@@ -37,8 +39,9 @@ class UserController extends Controller
      * @param  App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
+        $user = User::whereEmail('email', $request->email);
         return $user;
     }
 
