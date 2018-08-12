@@ -118,10 +118,22 @@ All responses are in JSON format. For activities there are two types of resource
 
 ### Routes
 
-All routes are grouped together within protected route group with middleware `auth:api` and because of that every request **MUST** contain a valid OAuth API token.
+All routes are grouped together within protected route group with middleware `auth:api` and because of that every request **MUST** contain a valid OAuth API token. The list of all existing routes in the application can be seen with command `php artisan route:list`. There are two main API resource routes, activities and registrations with implicit route model binding. Other routes are for users login and OAuth authentication.
 
 ### CORS
+
+Cross-origin resource sharing (CORS) is enabled through `CORS` middleware. For quick test of CORS, there is the route `{{base_url}}/{{api_prefix}}/cors`. It can be tested from other origin (domain) by calling this URL and the respones should be like: 
+```
+{
+    "CORS": "CORS is enabled!"
+}
+```
+In this way, there shouldn't be present CORS error and also different type of requests can be made including AJAX requests.
+
 ### Validation rules
+
+For now, including above mentioned requests about the form of HTTP header, it is included rule for registering people to some activity. For that purpose, body of request **MUST** contain an activity ID and club ID. Validation rules are defined in `RegistrationRequest`.
+
 ### Activities URLs
 ### Registrations URLs
 ### Creating a new user
