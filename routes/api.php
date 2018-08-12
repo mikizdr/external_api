@@ -22,26 +22,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::apiResource('activities', 'ActivityController');
+    Route::apiResource('users', 'UserController');
 });
-Route::apiResource('activities', 'ActivityController');
 Route::apiResource('registrations', 'RegistrationController');
 Route::apiResource('organizations', 'OrganizationController');
-Route::apiResource('users', 'UserController');
-
-/*
-|----------------------
-| Filtering activities
-|----------------------
-*/
-Route::get('{club_id}/filter_activities/', 'FilterActivitiesController@filterActivitiesByRequest');
 
 // Testing
-Route::apiResource('users', 'UserController');
-// Route::apiResource('clubs', 'ClubController');
-// Route::group(['prefix' => 'clubs/{club}'], function () {
-//     Route::get('users', 'ClubController@showUsers')->name('club.users');
-// });
-// Route::get('activities/{from}/{to}', 'ActivityController@activitiesBetweenDates')->name('activities.between');
 Route::post('users/club_user', 'UserController@atach_user')->name('club.user');
 // END Testing
 
@@ -50,8 +37,10 @@ Route::post('users/club_user', 'UserController@atach_user')->name('club.user');
 | CORS testing
 |
 */
-Route::get('hello', function () {
-  return 'Hello with CORS!';
+Route::get('cors', function () {
+    return response()->json([
+      'CORS' => 'CORS is enabled.'
+    ]);
 });
 
 
@@ -87,19 +76,20 @@ phone (optional)
 gender (optional)
 
 Registers a person for the given activity id. Returns a unique ID for this registration
+POST /registrations/
 
 Unregister person
-DELETE /registration/<REGISTRATION_ID>
+DELETE /registrations/<REGISTRATION_ID>
 
 Removes a registration
 
 Mark Present
-PUT /registration/<ID>/presence
+PUT /registrations/<ID>/presence
 
 Mark the person ‘present’ for the given registration (‘check-in’)
 
 Mark Absent
-DELETE /registration/<ID>/presence
+DELETE /registrations/<ID>/presence
 
 Mark the person ‘absent’ for the given registration (cancel ‘check-in’)
 
