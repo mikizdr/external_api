@@ -112,17 +112,17 @@ organizer_ref, name, is_day_event, start_date, zipcode, city, region, lat, lng, 
 With this, the URL for GET request should look like this: e.g. `{base_url}/api/activities?start_date=2018-08-15&allow_freetrial=1`.
 `show` method in `ActivityController` is used to fetch a single activity.
 
-### Responses and transformers
-
-All responses are in JSON format. For activities there are two types of resources: `ActivityCollection` and `ActivityResource`. The former is used to transform (adjust) the form of JSON reponse when client requires a collection of activities. The latter is used to transform response when sending data in JSON format for a single activity. It's easy to add more field to every type of response if frontend require more data about resources.
-
 ### Routes
 
 All routes are grouped together within protected route group with middleware `auth:api` and because of that every request **MUST** contain a valid OAuth API token. The list of all existing routes in the application can be seen with command `php artisan route:list`. There are two main API resource routes, activities and registrations with implicit route model binding. Other routes are for users login and OAuth authentication.
 
+### Responses and transformers
+
+All responses are in JSON format. For activities there are two types of resources: `ActivityCollection` and `ActivityResource`. The former is used to transform (adjust) the form of JSON reponse when client requires a collection of activities. The latter is used to transform response when sending data in JSON format for a single activity. It's easy to add more field to every type of response if frontend require more data about resources.
+
 ### CORS
 
-Cross-origin resource sharing (CORS) is enabled through `CORS` middleware. For quick test of CORS, there is the route `{{base_url}}/{{api_prefix}}/cors`. It can be tested from other origin (domain) by calling this URL and the respones should be like: 
+Cross-origin resource sharing (CORS) is enabled through `CORS` middleware. For quick test of CORS, there is the route `{{base_url}}/{{api_prefix}}/cors`. It can be tested from other origin (domain) by calling this URL and the respones is: 
 ```
 {
     "CORS": "CORS is enabled!"
@@ -132,7 +132,7 @@ In this way, there shouldn't be present CORS error and also different type of re
 
 ### Validation rules
 
-For now, including above mentioned requests about the form of HTTP header, it is included rule for registering people to some activity. For that purpose, body of request **MUST** contain an activity ID and club ID. Validation rules are defined in `RegistrationRequest`.
+For now, including above mentioned requests about the form of HTTP header, it is included rule for registering people to some activity. For that purpose, body of request **MUST** contain an activity ID and a club ID. Validation rules are defined in `RegistrationRequest`.
 
 ### Activities URLs
 ### Registrations URLs
