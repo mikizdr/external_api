@@ -15,8 +15,14 @@ class CreateUserEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $email;
-    public $request;
+    /**
+     * @var string
+     */
+    private $email;
+    /**
+     * @var Request
+     */
+    private $request;
 
     /**
      * Create a new event instance.
